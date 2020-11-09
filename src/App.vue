@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <div class="wrapper">
+      <div class="wrap">
         <div class="row">
           <div class="col text-center">
-            <router-link to="/character">
+            <router-link to="/">
               <img src="./assets/sw_logo.png" alt="logo">
            </router-link>
           </div>
@@ -12,9 +12,6 @@
       </div>
     </header>
     <router-view></router-view>
-    <footer class="m-auto">
-      <h3 class="m-auto">SWAPI</h3>
-    </footer>
   </div>
 </template>
 
@@ -45,12 +42,7 @@ header {
   border-bottom: 1px #2c3e50;
 }
 
-footer {
-  background-color: #000;
-  color: #fff;
-  padding: 0;
-  margin: 0;
-}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

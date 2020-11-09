@@ -1,37 +1,37 @@
 <template>
   <div>
     <div class="row mb-5"></div>
-    <div class="container">
+    <div v-if="loading === true">
+      <div class="container">
+        <div class="d-flex justify-content-center" style="position: absolute;top: 45%;left: 45%;">
+          <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="container">
       <div class="row">
         <div v-for="(character, index) in characters" class="col-6 about d-flex justify-content-center"
              v-bind:key="character">
           <div class="alert alert-info mt-5 about" role="alert">
             <h4>{{ character.name }}</h4>
-            <div class="row">
-              <div class="col-6">
+            <div class="row justify-content-center">
+              <div class="col-8">
                 <div>
-                  Gender: <strong>{{ character.gender }}</strong>
-                </div>
-                <div>
-                  Height: <strong>{{ character.height }}</strong>
+                  Пол: <strong>{{ character.gender }}</strong>
                 </div>
                 <div>
-                  Mass: <strong>{{ character.mass }}</strong>
+                  Рост: <strong>{{ character.height }}</strong>
                 </div>
-              </div>
-              <div class="col-6">
-                <strong>Starships:</strong>
-                <div v-if="starships.values()===[]">
-                  <span class="badge badge-info">{{ character.starships }}</span>
-                </div>
-                <div v-else>
-                  <span class="badge badge-danger">I haven't starhip </span>
+                <div>
+                  Вес: <strong>{{ character.mass }}</strong>
                 </div>
               </div>
             </div>
             <hr>
             <router-link :to="'/character/' + (index + 1)">
-              <button type="button" class="btn btn-info">See more info Person</button>
+              <button type="button" class="btn btn-info">Подробная информация о персонаже</button>
             </router-link>
           </div>
         </div>
@@ -46,6 +46,16 @@
             @change="handlePageChange"
         ></b-pagination>
       </div>
+    </div>
+    <div v-if="loading === true"></div>
+    <div v-else>
+      <footer class="m-auto">
+        <div class="container">
+          <div class="row">
+            <h5 class="m-auto">SWAPI | Костюхин Влад | Подробная информация | Страница {{ page }}</h5>
+          </div>
+        </div>
+      </footer>
     </div>
     <div class="modal" id="ModalBack" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -67,6 +77,7 @@ export default {
   components: {},
   data() {
     return {
+      loading: true,
       currentIndex: -1,
       page: 1,
       count: 90,
@@ -92,6 +103,7 @@ export default {
            console.log(response.statusText);
            console.log(response.headers);*/
           // console.log(response.config);
+          this.$data.loading = false
         }).catch(error => {
       console.log(error);
     })
@@ -158,4 +170,18 @@ export default {
 </script>
 
 <style scoped>
+#ModalBack {
+  background-color: #2c3e50;
+  opacity: 90%;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 </style>

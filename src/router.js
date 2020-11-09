@@ -7,8 +7,7 @@ Vue.use(Router);
 export default new Router({
     mode: "history",
     routes: [
-        { path: "/character", component: Main},
-        // { path: "/character?page=:id", component: Main},
+        { path: "/", component: Main},
         { path: "/character/:id", component: CharacterCard},
     ]
 });
